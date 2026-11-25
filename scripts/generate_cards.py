@@ -61,6 +61,7 @@ def fetch_github_telemetry() -> dict:
             ("Jun", 20), ("Jul", 9), ("Aug", 16), ("Sep", 24),
             ("Oct", 29), ("Nov", 34),
         ],
+        "weeks": [],
     }
 
     if not GITHUB_TOKEN:
@@ -157,6 +158,7 @@ def fetch_github_telemetry() -> dict:
             "repo_count": repo_count,
             "languages": languages,
             "monthly": monthly or fallback["monthly"],
+            "weeks": cal["weeks"],
         }
     except (urllib.error.URLError, KeyError, ValueError, TypeError):
         return fallback
@@ -168,18 +170,17 @@ BASE_CSS = """
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 @keyframes growX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes growY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-@keyframes flowDash{from{stroke-dashoffset:48}to{stroke-dashoffset:0}}
+@keyframes pop{0%{opacity:0;transform:scale(.3)}70%{opacity:1;transform:scale(1.12)}100%{opacity:1;transform:none}}
 @keyframes sheen{0%{transform:translateX(-340px) skewX(-20deg)}28%,100%{transform:translateX(520px) skewX(-20deg)}}
 .pulse{transform-box:fill-box;transform-origin:center;animation:pulseDot 2s ease-in-out infinite}
 .blink{animation:blinkCursor 1.1s steps(1) infinite}
 .fade{opacity:0;animation:fadeUp .7s cubic-bezier(.2,.7,.2,1) both}
 .gx{transform-box:fill-box;transform-origin:left;animation:growX .9s cubic-bezier(.2,.8,.2,1) both}
 .gy{transform-box:fill-box;transform-origin:bottom;animation:growY .8s cubic-bezier(.2,.8,.2,1) both}
-.flow{stroke-dasharray:6 6;animation:flowDash 1.4s linear infinite}
-.flow-slow{stroke-dasharray:8 8;animation:flowDash 2.2s linear infinite}
+.p{opacity:0;transform-box:fill-box;transform-origin:center;animation:pop .38s ease-out both}
 .sheen{animation:sheen 6s ease-in-out infinite}
 @media (prefers-reduced-motion:reduce){
-  .pulse,.blink,.fade,.gx,.gy,.flow,.flow-slow,.sheen{animation:none!important;opacity:1!important;transform:none!important}
+  .pulse,.blink,.fade,.gx,.gy,.p,.sheen{animation:none!important;opacity:1!important;transform:none!important}
 }
 """
 
@@ -403,12 +404,100 @@ def render_velocity(fonts_css: str, telemetry: dict) -> str:
 </svg>"""
 
 
+def render_heatmap(fonts_css: str, telemetry: dict) -> str:
+    """Render monochrome white-to-gray contribution heatmap on a deep black frame."""
+    weeks = telemetry.get("weeks") or []
+    # Fallback 53 weeks if run locally without token
+    if not weeks:
+        weeks = [{"contributionDays": [{"contributionCount": 0, "date": ""} for _ in range(7)]} for _ in range(53)]
+
+    weeks = weeks[-53:]
+    all_nonzero = [
+        d["contributionCount"]
+        for w in weeks
+        for d in w.get("contributionDays", [])
+        if d.get("contributionCount", 0) > 0
+    ]
+    max_count = max(all_nonzero, default=1)
+
+    def mono_color(count: int) -> str:
+        if count <= 0:
+            return "#161618"
+        ratio = count / max_count
+        if ratio <= 0.25:
+            return "#4a4a4e"
+        if ratio <= 0.50:
+            return "#7a7a80"
+        if ratio <= 0.75:
+            return "#bdbdc2"
+        return "#ffffff"
+
+    rects = []
+    month_labels = []
+    seen_months = set()
+    start_x = 44
+    start_y = 84
+    col_step = 15
+    row_step = 15
+
+    for w_idx, week in enumerate(weeks):
+        x = start_x + w_idx * col_step
+        days = week.get("contributionDays", [])
+        if days and days[0].get("date"):
+            ym = days[0]["date"][:7]
+            if ym not in seen_months:
+                seen_months.add(ym)
+                if len(seen_months) > 1 or w_idx == 0:
+                    m_txt = datetime.strptime(ym, "%Y-%m").strftime("%b")
+                    month_labels.append(
+                        f'<text x="{x}" y="206" font-family="\'JetBrains Mono\', monospace" font-size="10" fill="#737373">{m_txt}</text>'
+                    )
+
+        for d_idx, day in enumerate(days):
+            y = start_y + d_idx * row_step
+            cnt = day.get("contributionCount", 0)
+            date_str = day.get("date", "")
+            fill = mono_color(cnt)
+            delay = f"{0.15 + w_idx * 0.025 + d_idx * 0.015:.2f}s"
+            tip = f"{date_str}: {cnt} contributions" if date_str else f"{cnt} contributions"
+            rects.append(
+                f'<rect class="p" style="animation-delay:{delay}" x="{x}" y="{y}" width="12" height="12" rx="3" fill="{fill}">'
+                f'<title>{html.escape(tip)}</title></rect>'
+            )
+
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="880" height="236" viewBox="0 0 880 236" role="img" aria-label="Contribution graph in monochrome">
+  <style>{fonts_css}{BASE_CSS}</style>
+  <rect width="880" height="236" rx="16" fill="#0a0a0a"/>
+  <rect x="0.5" y="0.5" width="879" height="235" rx="15.5" fill="none" stroke="#262626"/>
+
+  <g class="fade" style="animation-delay:0.05s">
+    <text x="44" y="46" font-family="'Instrument Serif', Georgia, serif" font-size="28" fill="#fafafa">Every commit, <tspan font-style="italic" fill="#a3a3a3">in monochrome</tspan></text>
+    <text x="836" y="44" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="11" letter-spacing="1" fill="#737373">{telemetry["total_contributions"]} CONTRIBUTIONS · REFRESHED DAILY</text>
+  </g>
+  <line x1="44" y1="64" x2="836" y2="64" stroke="#1a1a1a"/>
+
+  {''.join(rects)}
+
+  <g class="fade" style="animation-delay:0.8s">
+    {''.join(month_labels)}
+    <text x="744" y="206" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10" fill="#737373">Less</text>
+    <rect x="752" y="196" width="11" height="11" rx="2.5" fill="#161618"/>
+    <rect x="766" y="196" width="11" height="11" rx="2.5" fill="#4a4a4e"/>
+    <rect x="780" y="196" width="11" height="11" rx="2.5" fill="#7a7a80"/>
+    <rect x="794" y="196" width="11" height="11" rx="2.5" fill="#bdbdc2"/>
+    <rect x="808" y="196" width="11" height="11" rx="2.5" fill="#ffffff"/>
+    <text x="824" y="206" font-family="'JetBrains Mono', monospace" font-size="10" fill="#737373">More</text>
+  </g>
+</svg>"""
+
+
 def main() -> None:
     CARDS_DIR.mkdir(parents=True, exist_ok=True)
     fonts_css = load_fonts_css()
     telemetry = fetch_github_telemetry()
 
     (CARDS_DIR / "hero.svg").write_text(render_hero(fonts_css), encoding="utf-8")
+    (CARDS_DIR / "heatmap.svg").write_text(render_heatmap(fonts_css, telemetry), encoding="utf-8")
     (CARDS_DIR / "project-stellar.svg").write_text(
         render_project_card(
             fonts_css,
