@@ -533,6 +533,118 @@ def render_heatmap(fonts_css: str, telemetry: dict) -> str:
 </svg>"""
 
 
+def render_about(fonts_css: str) -> str:
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="880" height="162" viewBox="0 0 880 162" role="img" aria-label="01 About">
+  <style>{fonts_css}{BASE_CSS}</style>
+  <rect width="880" height="162" rx="16" fill="#0a0a0a"/>
+  <rect x="0.5" y="0.5" width="879" height="161" rx="15.5" fill="none" stroke="#262626"/>
+
+  <g class="fade" style="animation-delay:0.05s">
+    <rect x="32" y="24" width="28" height="20" rx="6" fill="#171717" stroke="#2a2a2a"/>
+    <text x="46" y="38" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#a3a3a3">01</text>
+    <text x="70" y="40" font-family="'Plus Jakarta Sans', sans-serif" font-size="20" font-weight="800" letter-spacing="-0.5" fill="#fafafa">About</text>
+    <text x="848" y="38" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10.5" letter-spacing="1" fill="#737373">BANGKOK, TH · SYSTEMS &amp; FULL-STACK</text>
+  </g>
+  <line x1="32" y1="56" x2="848" y2="56" stroke="#1a1a1a"/>
+
+  <g class="fade" style="animation-delay:0.15s" font-family="'JetBrains Mono', monospace" font-size="11.5">
+    <rect x="32" y="72" width="3" height="26" rx="1.5" fill="#ffffff"/>
+    <text x="46" y="83" fill="#e5e5e5">Full-Stack Engineer &amp; Systems Architect focused on end-to-end architecture —</text>
+    <text x="46" y="99" fill="#a3a3a3">from relational schemas, RBAC boundaries, and queues to precision web &amp; native UI.</text>
+
+    <circle cx="38" cy="122" r="2.5" fill="#737373"/>
+    <text x="50" y="126" fill="#a3a3a3">Production Shipped: Next.js 15, ASP.NET Core 10, Cloudflare Workers, Docker &amp; NeonDB</text>
+
+    <circle cx="38" cy="142" r="2.5" fill="#737373"/>
+    <text x="50" y="146" fill="#737373">Native macOS Craft: Swift 6, SwiftUI &amp; AppKit developer tooling</text>
+  </g>
+</svg>"""
+
+
+def render_projects_table(fonts_css: str) -> str:
+    rows = [
+        ("Stellar Job", "Field Ops & GIS", "48+ routes, Leaflet GIS routing, digital sign & Thai PDF export", "Next.js 15 · Prisma · NeonDB", "LIVE"),
+        ("PrivateGym", "Pod Booking", "5-role RBAC, real-time pod quota, 3-branch ops, Docker .NET 10", "ASP.NET 10 · EF 9 · Postgres", "LIVE"),
+        ("KeyStay", "Edge Microservices", "105+ serverless REST APIs with Outbox Pattern & QStash queues", "CF Workers · D1 · Drizzle", "CODE"),
+        ("MusicGear", "Full SDLC Commerce", "Multi-role RBAC (Customer, Staff, Admin) & automated UAT suite", "TypeScript · RBAC · UAT", "LIVE"),
+        ("MyNotchApp", "macOS Cockpit", "Native Dynamic Island / Notch telemetry & workspace controls", "Swift 6 · SwiftUI · AppKit", "CODE"),
+    ]
+    row_svgs = []
+    y = 74
+    for idx, (name, sub, desc, stack, badge) in enumerate(rows):
+        if idx > 0:
+            row_svgs.append(f'<line x1="32" y1="{y - 8}" x2="848" y2="{y - 8}" stroke="#171717"/>')
+        badge_bg = "#fafafa" if badge == "LIVE" else "#171717"
+        badge_fg = "#0a0a0a" if badge == "LIVE" else "#a3a3a3"
+        badge_stroke = "#fafafa" if badge == "LIVE" else "#2a2a2a"
+        row_svgs.append(
+            f'<g class="fade" style="animation-delay:{0.1 + idx * 0.06:.2f}s">'
+            f'<text x="32" y="{y + 12}" font-family="\'Plus Jakarta Sans\', sans-serif" font-size="14" font-weight="700" fill="#fafafa">{html.escape(name)}</text>'
+            f'<text x="32" y="{y + 28}" font-family="\'JetBrains Mono\', monospace" font-size="9.5" fill="#737373">{html.escape(sub)}</text>'
+            f'<text x="176" y="{y + 12}" font-family="\'JetBrains Mono\', monospace" font-size="10.5" fill="#d4d4d4">{html.escape(desc)}</text>'
+            f'<text x="176" y="{y + 28}" font-family="\'JetBrains Mono\', monospace" font-size="10" fill="#737373">{html.escape(stack)}</text>'
+            f'<rect x="796" y="{y + 4}" width="52" height="22" rx="11" fill="{badge_bg}" stroke="{badge_stroke}"/>'
+            f'<text x="822" y="{y + 18.5}" text-anchor="middle" font-family="\'JetBrains Mono\', monospace" font-size="9.5" font-weight="700" fill="{badge_fg}">{badge}</text>'
+            f'</g>'
+        )
+        y += 52
+
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="880" height="340" viewBox="0 0 880 340" role="img" aria-label="02 Featured Systems and Projects">
+  <style>{fonts_css}{BASE_CSS}</style>
+  <rect width="880" height="340" rx="16" fill="#0a0a0a"/>
+  <rect x="0.5" y="0.5" width="879" height="339" rx="15.5" fill="none" stroke="#262626"/>
+
+  <g class="fade" style="animation-delay:0.05s">
+    <rect x="32" y="24" width="28" height="20" rx="6" fill="#171717" stroke="#2a2a2a"/>
+    <text x="46" y="38" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#a3a3a3">02</text>
+    <text x="70" y="40" font-family="'Plus Jakarta Sans', sans-serif" font-size="20" font-weight="800" letter-spacing="-0.5" fill="#fafafa">Featured Systems &amp; Projects</text>
+    <text x="848" y="38" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10.5" letter-spacing="1" fill="#737373">05 PRODUCTION WORKS</text>
+  </g>
+  <line x1="32" y1="56" x2="848" y2="56" stroke="#1a1a1a"/>
+
+  {''.join(row_svgs)}
+</svg>"""
+
+
+def render_stack(fonts_css: str) -> str:
+    layers = [
+        ("LANGUAGES", "TypeScript · JavaScript · C# (.NET 10) · Swift 6 · SQL · HTML/CSS"),
+        ("FRONTEND", "Next.js 15 · React 19 · Tailwind CSS · Framer Motion · SwiftUI · Bootstrap 5"),
+        ("BACKEND", "ASP.NET Core 10 MVC · Node.js (Express / NestJS) · CF Workers · Hono · QStash"),
+        ("DATA & ORM", "PostgreSQL (NeonDB) · Cloudflare D1 · Prisma · EF Core 9 · Drizzle · Redis"),
+        ("INFRA & SEC", "Docker · Vercel · Render · GitHub Actions · RBAC · CSRF & JWT Hardening"),
+    ]
+    row_svgs = []
+    y = 82
+    for idx, (layer, items) in enumerate(layers):
+        if idx > 0:
+            row_svgs.append(f'<line x1="32" y1="{y - 16}" x2="848" y2="{y - 16}" stroke="#171717"/>')
+        row_svgs.append(
+            f'<g class="fade" style="animation-delay:{0.1 + idx * 0.06:.2f}s">'
+            f'<rect x="32" y="{y - 11}" width="106" height="20" rx="6" fill="#141414" stroke="#262626"/>'
+            f'<text x="85" y="{y + 2.5}" text-anchor="middle" font-family="\'JetBrains Mono\', monospace" font-size="9.5" font-weight="700" letter-spacing="0.8" fill="#a3a3a3">{html.escape(layer)}</text>'
+            f'<text x="156" y="{y + 3}" font-family="\'JetBrains Mono\', monospace" font-size="11.5" fill="#e5e5e5">{html.escape(items)}</text>'
+            f'</g>'
+        )
+        y += 32
+
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="880" height="236" viewBox="0 0 880 236" role="img" aria-label="03 Technical Stack">
+  <style>{fonts_css}{BASE_CSS}</style>
+  <rect width="880" height="236" rx="16" fill="#0a0a0a"/>
+  <rect x="0.5" y="0.5" width="879" height="235" rx="15.5" fill="none" stroke="#262626"/>
+
+  <g class="fade" style="animation-delay:0.05s">
+    <rect x="32" y="24" width="28" height="20" rx="6" fill="#171717" stroke="#2a2a2a"/>
+    <text x="46" y="38" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#a3a3a3">03</text>
+    <text x="70" y="40" font-family="'Plus Jakarta Sans', sans-serif" font-size="20" font-weight="800" letter-spacing="-0.5" fill="#fafafa">Technical Stack</text>
+    <text x="848" y="38" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10.5" letter-spacing="1" fill="#737373">FULL-STACK ARSENAL</text>
+  </g>
+  <line x1="32" y1="56" x2="848" y2="56" stroke="#1a1a1a"/>
+
+  {''.join(row_svgs)}
+</svg>"""
+
+
 def main() -> None:
     CARDS_DIR.mkdir(parents=True, exist_ok=True)
     fonts_css = load_fonts_css()
@@ -542,7 +654,10 @@ def main() -> None:
     (CARDS_DIR / "heatmap.svg").write_text(render_heatmap(fonts_css, telemetry), encoding="utf-8")
     (CARDS_DIR / "languages.svg").write_text(render_languages(fonts_css, telemetry), encoding="utf-8")
     (CARDS_DIR / "velocity.svg").write_text(render_velocity(fonts_css, telemetry), encoding="utf-8")
-    print("Generated 4 SVGs in cards/:", json.dumps(telemetry))
+    (CARDS_DIR / "about.svg").write_text(render_about(fonts_css), encoding="utf-8")
+    (CARDS_DIR / "projects.svg").write_text(render_projects_table(fonts_css), encoding="utf-8")
+    (CARDS_DIR / "stack.svg").write_text(render_stack(fonts_css), encoding="utf-8")
+    print("Generated 7 SVGs in cards/:", json.dumps(telemetry))
 
 
 if __name__ == "__main__":
