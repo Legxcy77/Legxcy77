@@ -3,8 +3,6 @@
 
 <a href="https://github.com/Legxcy77/portfolio"><img src="./cards/hero.svg" width="100%" alt="Pawalit (Legxcy77) — Full-Stack Engineer & Systems Architect" /></a><br>
 
-<img src="./cards/architecture.svg" width="100%" alt="Live System Architecture: Client -> Edge & API -> Serverless Cloud" /><br>
-
 <a href="https://stellar-job-management.vercel.app"><img src="./cards/project-stellar.svg" width="33.333%" alt="Stellar Job Management" /></a><a href="https://privategym.onrender.com"><img src="./cards/project-privategym.svg" width="33.333%" alt="PrivateGym" /></a><a href="https://github.com/csi204/keystay"><img src="./cards/project-keystay.svg" width="33.333%" alt="KeyStay Microservices" /></a><br>
 
 <img src="./cards/languages.svg" width="50%" alt="Language DNA" /><img src="./cards/velocity.svg" width="50%" alt="Shipped Velocity" />
@@ -17,3 +15,4 @@
   <a href="https://privategym.onrender.com">PrivateGym Live</a> &nbsp;/&nbsp;
   <a href="mailto:pawalit.dev@gmail.com">Contact</a>
 </p>
+

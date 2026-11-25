@@ -42,3 +42,4 @@ jobs:
             git commit -m "chore(profile): refresh live GitHub telemetry SVGs"
             git push
           fi
+

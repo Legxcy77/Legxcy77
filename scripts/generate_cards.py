@@ -268,75 +268,6 @@ def render_hero(fonts_css: str) -> str:
 </svg>"""
 
 
-def render_architecture(fonts_css: str) -> str:
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="880" height="220" viewBox="0 0 880 220" role="img" aria-label="Live System Architecture">
-  <defs>
-    <clipPath id="archClip"><rect width="880" height="220" rx="16"/></clipPath>
-    <linearGradient id="lineGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#10b981" stop-opacity="0.3"/>
-      <stop offset="50%" stop-color="#10b981" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.5"/>
-    </linearGradient>
-    <linearGradient id="lineGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.5"/>
-      <stop offset="50%" stop-color="#38bdf8" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#10b981" stop-opacity="0.8"/>
-    </linearGradient>
-  </defs>
-  <style>{fonts_css}{BASE_CSS}</style>
-  <g clip-path="url(#archClip)">
-    <rect width="880" height="220" rx="16" fill="#0a0a0a"/>
-    <rect x="0.5" y="0.5" width="879" height="219" rx="15.5" fill="none" stroke="#262626"/>
-
-    <!-- Header -->
-    <text x="32" y="38" font-family="'Instrument Serif', Georgia, serif" font-size="24" fill="#fafafa">Live System <tspan font-style="italic" fill="#10b981">Architecture</tspan></text>
-    <text x="848" y="36" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10.5" letter-spacing="1.2" fill="#737373">END-TO-END TOPOLOGY</text>
-    <line x1="32" y1="54" x2="848" y2="54" stroke="#1f1f1f"/>
-
-    <!-- Animated Flow Lines -->
-    <!-- Left to Center -->
-    <path d="M 268 128 L 326 128" fill="none" stroke="#262626" stroke-width="2"/>
-    <path class="flow" d="M 268 128 L 326 128" fill="none" stroke="url(#lineGrad1)" stroke-width="2.5" stroke-linecap="round"/>
-    <polygon points="324,124 331,128 324,132" fill="#f59e0b"/>
-
-    <!-- Center to Right -->
-    <path d="M 554 128 L 612 128" fill="none" stroke="#262626" stroke-width="2"/>
-    <path class="flow-slow" d="M 554 128 L 612 128" fill="none" stroke="url(#lineGrad2)" stroke-width="2.5" stroke-linecap="round"/>
-    <polygon points="610,124 617,128 610,132" fill="#10b981"/>
-
-    <!-- Node 1: Client Layer -->
-    <g class="fade" style="animation-delay:0.1s">
-      <rect x="32" y="76" width="236" height="114" rx="12" fill="#121214" stroke="#2a2a2e"/>
-      <circle class="pulse" cx="50" cy="96" r="4" fill="#10b981"/>
-      <text x="62" y="100" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" letter-spacing="1" fill="#10b981">01 · CLIENT LAYER</text>
-      <text x="46" y="126" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="700" fill="#fafafa">Web &amp; Native UI</text>
-      <text x="46" y="148" font-family="'JetBrains Mono', monospace" font-size="11" fill="#a3a3a3">Next.js 15 · React 19</text>
-      <text x="46" y="166" font-family="'JetBrains Mono', monospace" font-size="11" fill="#737373">Tailwind · Swift · Leaflet</text>
-    </g>
-
-    <!-- Node 2: Edge & API Core -->
-    <g class="fade" style="animation-delay:0.2s">
-      <rect x="330" y="76" width="224" height="114" rx="12" fill="#121214" stroke="#f59e0b" stroke-opacity="0.35"/>
-      <circle class="pulse" cx="348" cy="96" r="4" fill="#f59e0b"/>
-      <text x="360" y="100" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" letter-spacing="1" fill="#fbbf24">02 · EDGE &amp; API</text>
-      <text x="344" y="126" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="700" fill="#fafafa">Core Services</text>
-      <text x="344" y="148" font-family="'JetBrains Mono', monospace" font-size="11" fill="#a3a3a3">ASP.NET Core 10 · EF 9</text>
-      <text x="344" y="166" font-family="'JetBrains Mono', monospace" font-size="11" fill="#737373">CF Workers · QStash</text>
-    </g>
-
-    <!-- Node 3: Data & Infra -->
-    <g class="fade" style="animation-delay:0.3s">
-      <rect x="616" y="76" width="232" height="114" rx="12" fill="#121214" stroke="#38bdf8" stroke-opacity="0.35"/>
-      <circle class="pulse" cx="634" cy="96" r="4" fill="#38bdf8"/>
-      <text x="646" y="100" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" letter-spacing="1" fill="#38bdf8">03 · DATA &amp; INFRA</text>
-      <text x="630" y="126" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="700" fill="#fafafa">Serverless Cloud</text>
-      <text x="630" y="148" font-family="'JetBrains Mono', monospace" font-size="11" fill="#a3a3a3">Neon Postgres · D1 SQL</text>
-      <text x="630" y="166" font-family="'JetBrains Mono', monospace" font-size="11" fill="#737373">Docker · Vercel · Render</text>
-    </g>
-  </g>
-</svg>"""
-
-
 def render_project_card(
     fonts_css: str,
     title: str,
@@ -478,7 +409,6 @@ def main() -> None:
     telemetry = fetch_github_telemetry()
 
     (CARDS_DIR / "hero.svg").write_text(render_hero(fonts_css), encoding="utf-8")
-    (CARDS_DIR / "architecture.svg").write_text(render_architecture(fonts_css), encoding="utf-8")
     (CARDS_DIR / "project-stellar.svg").write_text(
         render_project_card(
             fonts_css,
@@ -528,3 +458,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
