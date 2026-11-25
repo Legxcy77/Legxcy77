@@ -316,6 +316,56 @@ def render_project_card(
 </svg>"""
 
 
+def render_wide_project_card(
+    fonts_css: str,
+    title: str,
+    subtitle: str,
+    badge: str,
+    accent: str,
+    desc: str,
+    tags: list[str],
+    delay: str,
+) -> str:
+    tag_svg = []
+    x = 28
+    for t in tags[:4]:
+        w = len(t) * 6.8 + 18
+        tag_svg.append(
+            f'<rect x="{x}" y="106" width="{w:.1f}" height="22" rx="11" fill="#171717" stroke="#2a2a2a"/>'
+            f'<text x="{x + w / 2:.1f}" y="120.5" text-anchor="middle" font-family="\'JetBrains Mono\', monospace" font-size="9.5" fill="#d4d4d4">{html.escape(t)}</text>'
+        )
+        x += w + 6
+
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="432" height="148" viewBox="0 0 432 148" role="img" aria-label="{html.escape(title)}">
+  <defs>
+    <clipPath id="wpClip"><rect width="432" height="148" rx="16"/></clipPath>
+    <linearGradient id="wsheenGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <style>{fonts_css}{BASE_CSS}</style>
+  <g clip-path="url(#wpClip)">
+    <rect width="432" height="148" rx="16" fill="#0c0c0d"/>
+    <rect x="0.5" y="0.5" width="431" height="147" rx="15.5" fill="none" stroke="{accent}" stroke-opacity="0.3"/>
+    <rect class="sheen" x="-80" y="0" width="90" height="148" fill="url(#wsheenGrad)"/>
+
+    <g class="fade" style="animation-delay:{delay}">
+      <text x="28" y="42" font-family="'Plus Jakarta Sans', sans-serif" font-size="21" font-weight="800" letter-spacing="-0.5" fill="#fafafa">{html.escape(title)}</text>
+      <text x="28" y="62" font-family="'JetBrains Mono', monospace" font-size="10.5" fill="#737373">{html.escape(subtitle)}</text>
+
+      <rect x="{404 - (len(badge) * 6.5 + 24):.0f}" y="24" width="{len(badge) * 6.5 + 24:.0f}" height="22" rx="11" fill="{accent}" fill-opacity="0.12" stroke="{accent}" stroke-opacity="0.4"/>
+      <circle class="pulse" cx="{404 - (len(badge) * 6.5 + 24) + 12:.0f}" cy="35" r="3" fill="{accent}"/>
+      <text x="{404 - (len(badge) * 6.5 + 24) + 21:.0f}" y="38.5" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="700" letter-spacing="0.6" fill="{accent}">{html.escape(badge)}</text>
+
+      <text x="28" y="88" font-family="'JetBrains Mono', monospace" font-size="11" fill="#b5b5b5">{html.escape(desc)}</text>
+      {''.join(tag_svg)}
+    </g>
+  </g>
+</svg>"""
+
+
 def render_languages(fonts_css: str, telemetry: dict) -> str:
     langs = telemetry["languages"]
     bar_width = 368
@@ -529,6 +579,32 @@ def main() -> None:
             line2="Outbox pattern & QStash queue",
             tags=["Workers", "Drizzle", "QStash"],
             delay="0.3s",
+        ),
+        encoding="utf-8",
+    )
+    (CARDS_DIR / "project-musicgear.svg").write_text(
+        render_wide_project_card(
+            fonts_css,
+            title="MUSICGEAR",
+            subtitle="Multi-Role E-Commerce · Full SDLC",
+            badge="LIVE · PAGES",
+            accent="#d4d4d4",
+            desc="RBAC (Customer, Staff, Admin) & automated UAT suite",
+            tags=["TypeScript", "RBAC", "Full-Stack", "UAT"],
+            delay="0.35s",
+        ),
+        encoding="utf-8",
+    )
+    (CARDS_DIR / "project-mynotch.svg").write_text(
+        render_wide_project_card(
+            fonts_css,
+            title="MYNOTCHAPP",
+            subtitle="macOS Notch Developer Cockpit",
+            badge="NATIVE · SWIFT 6",
+            accent="#ffffff",
+            desc="Dynamic Island telemetry & quick workspace actions",
+            tags=["Swift 6", "SwiftUI", "AppKit", "macOS"],
+            delay="0.4s",
         ),
         encoding="utf-8",
     )
