@@ -540,77 +540,9 @@ def main() -> None:
 
     (CARDS_DIR / "hero.svg").write_text(render_hero(fonts_css), encoding="utf-8")
     (CARDS_DIR / "heatmap.svg").write_text(render_heatmap(fonts_css, telemetry), encoding="utf-8")
-    (CARDS_DIR / "project-stellar.svg").write_text(
-        render_project_card(
-            fonts_css,
-            title="STELLAR JOB",
-            subtitle="GIS Field Operations",
-            badge="LIVE · VERCEL",
-            accent="#ffffff",
-            line1="48+ routes · Leaflet GIS routing",
-            line2="Digital sign & Thai PDF export",
-            tags=["Next.js 15", "Zustand", "NeonDB"],
-            delay="0.1s",
-        ),
-        encoding="utf-8",
-    )
-    (CARDS_DIR / "project-privategym.svg").write_text(
-        render_project_card(
-            fonts_css,
-            title="PRIVATEGYM",
-            subtitle="Luxury Pod Booking",
-            badge="LIVE · RENDER",
-            accent="#d4d4d4",
-            line1="5-Role RBAC · 3-branch pod quota",
-            line2="Dockerized .NET 10 + Postgres",
-            tags=[".NET 10", "EF Core 9", "Docker"],
-            delay="0.2s",
-        ),
-        encoding="utf-8",
-    )
-    (CARDS_DIR / "project-keystay.svg").write_text(
-        render_project_card(
-            fonts_css,
-            title="KEYSTAY",
-            subtitle="Edge Microservices",
-            badge="105 EDGE APIs",
-            accent="#a3a3a3",
-            line1="105 Edge APIs · D1 SQLite",
-            line2="Outbox pattern & QStash queue",
-            tags=["Workers", "Drizzle", "QStash"],
-            delay="0.3s",
-        ),
-        encoding="utf-8",
-    )
-    (CARDS_DIR / "project-musicgear.svg").write_text(
-        render_wide_project_card(
-            fonts_css,
-            title="MUSICGEAR",
-            subtitle="Multi-Role E-Commerce · Full SDLC",
-            badge="LIVE · PAGES",
-            accent="#d4d4d4",
-            desc="RBAC (Customer, Staff, Admin) & automated UAT suite",
-            tags=["TypeScript", "RBAC", "Full-Stack", "UAT"],
-            delay="0.35s",
-        ),
-        encoding="utf-8",
-    )
-    (CARDS_DIR / "project-mynotch.svg").write_text(
-        render_wide_project_card(
-            fonts_css,
-            title="MYNOTCHAPP",
-            subtitle="macOS Notch Developer Cockpit",
-            badge="NATIVE · SWIFT 6",
-            accent="#ffffff",
-            desc="Dynamic Island telemetry & quick workspace actions",
-            tags=["Swift 6", "SwiftUI", "AppKit", "macOS"],
-            delay="0.4s",
-        ),
-        encoding="utf-8",
-    )
     (CARDS_DIR / "languages.svg").write_text(render_languages(fonts_css, telemetry), encoding="utf-8")
     (CARDS_DIR / "velocity.svg").write_text(render_velocity(fonts_css, telemetry), encoding="utf-8")
-    print("Generated 7 SVGs in cards/:", json.dumps(telemetry))
+    print("Generated 4 SVGs in cards/:", json.dumps(telemetry))
 
 
 if __name__ == "__main__":
