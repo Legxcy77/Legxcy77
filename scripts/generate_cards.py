@@ -24,8 +24,6 @@ GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 def load_fonts_css() -> str:
     """Base64-encode local WOFF2 fonts into @font-face CSS rules for GitHub CSP compatibility."""
     font_specs = [
-        ("Instrument Serif", "normal", "400", "instrument-serif-400-normal.woff2"),
-        ("Instrument Serif", "italic", "400", "instrument-serif-400-italic.woff2"),
         ("JetBrains Mono", "normal", "400", "jetbrains-mono-400-normal.woff2"),
         ("JetBrains Mono", "normal", "700", "jetbrains-mono-700-normal.woff2"),
         ("Plus Jakarta Sans", "normal", "700", "plus-jakarta-sans-700-normal.woff2"),
@@ -213,7 +211,7 @@ def render_hero(fonts_css: str) -> str:
 
     <g class="fade" style="animation-delay:0.15s">
       <text x="32" y="102" font-family="'Plus Jakarta Sans', sans-serif" font-size="42" font-weight="800" letter-spacing="-1.5" fill="#fafafa">PAWALIT</text>
-      <text x="228" y="102" font-family="'Instrument Serif', Georgia, serif" font-style="italic" font-size="42" fill="#a3a3a3">/ Legxcy77</text>
+      <text x="234" y="102" font-family="'Plus Jakarta Sans', sans-serif" font-size="34" font-weight="700" letter-spacing="-1" fill="#737373">/ Legxcy77</text>
     </g>
 
     <g class="fade" style="animation-delay:0.25s">
@@ -352,7 +350,7 @@ def render_languages(fonts_css: str, telemetry: dict) -> str:
   <rect width="432" height="196" rx="16" fill="#0a0a0a"/>
   <rect x="0.5" y="0.5" width="431" height="195" rx="15.5" fill="none" stroke="#262626"/>
 
-  <text x="32" y="38" font-family="'Instrument Serif', Georgia, serif" font-size="23" fill="#fafafa">Language <tspan font-style="italic" fill="#a3a3a3">DNA</tspan></text>
+  <text x="32" y="38" font-family="'Plus Jakarta Sans', sans-serif" font-size="20" font-weight="800" letter-spacing="-0.5" fill="#fafafa">Language <tspan fill="#737373">DNA</tspan></text>
   <text x="400" y="36" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10.5" fill="#737373">{telemetry["repo_count"]} PUBLIC REPOS</text>
   <text x="32" y="66" font-family="'JetBrains Mono', monospace" font-size="11" fill="#737373">Aggregated from active non-fork repositories</text>
 
@@ -395,7 +393,7 @@ def render_velocity(fonts_css: str, telemetry: dict) -> str:
   <rect width="432" height="196" rx="16" fill="#0a0a0a"/>
   <rect x="0.5" y="0.5" width="431" height="195" rx="15.5" fill="none" stroke="#262626"/>
 
-  <text x="32" y="38" font-family="'Instrument Serif', Georgia, serif" font-size="23" fill="#fafafa">Shipped <tspan font-style="italic" fill="#10b981">Velocity</tspan></text>
+  <text x="32" y="38" font-family="'Plus Jakarta Sans', sans-serif" font-size="20" font-weight="800" letter-spacing="-0.5" fill="#fafafa">Shipped <tspan fill="#10b981">Velocity</tspan></text>
   <text x="400" y="36" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10.5" fill="#10b981">{telemetry["total_contributions"]} / YR</text>
   <text x="32" y="66" font-family="'JetBrains Mono', monospace" font-size="11" fill="#737373">{telemetry["total_commits"]} commits · {telemetry["total_prs"]} PRs · auto-synced</text>
 
@@ -471,7 +469,7 @@ def render_heatmap(fonts_css: str, telemetry: dict) -> str:
   <rect x="0.5" y="0.5" width="879" height="235" rx="15.5" fill="none" stroke="#262626"/>
 
   <g class="fade" style="animation-delay:0.05s">
-    <text x="44" y="46" font-family="'Instrument Serif', Georgia, serif" font-size="28" fill="#fafafa">Every commit, <tspan font-style="italic" fill="#a3a3a3">in monochrome</tspan></text>
+    <text x="44" y="46" font-family="'Plus Jakarta Sans', sans-serif" font-size="22" font-weight="800" letter-spacing="-0.6" fill="#fafafa">Every commit, <tspan fill="#737373">in monochrome</tspan></text>
     <text x="836" y="44" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="11" letter-spacing="1" fill="#737373">{telemetry["total_contributions"]} CONTRIBUTIONS · REFRESHED DAILY</text>
   </g>
   <line x1="44" y1="64" x2="836" y2="64" stroke="#1a1a1a"/>
