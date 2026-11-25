@@ -28,20 +28,20 @@
 </style>
   <g clip-path="url(#pClip)">
     <rect width="286" height="214" rx="16" fill="#0c0c0d"/>
-    <rect x="0.5" y="0.5" width="285" height="213" rx="15.5" fill="none" stroke="#f59e0b" stroke-opacity="0.35"/>
+    <rect x="0.5" y="0.5" width="285" height="213" rx="15.5" fill="none" stroke="#d4d4d4" stroke-opacity="0.35"/>
     <rect class="sheen" x="-80" y="0" width="90" height="214" fill="url(#sheenGrad)"/>
 
     <g class="fade" style="animation-delay:0.2s">
-      <rect x="22" y="22" width="108" height="22" rx="11" fill="#f59e0b" fill-opacity="0.12" stroke="#f59e0b" stroke-opacity="0.4"/>
-      <circle class="pulse" cx="34" cy="33" r="3" fill="#f59e0b"/>
-      <text x="43" y="36.5" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="700" letter-spacing="0.6" fill="#f59e0b">LIVE · RENDER</text>
+      <rect x="22" y="22" width="108" height="22" rx="11" fill="#d4d4d4" fill-opacity="0.12" stroke="#d4d4d4" stroke-opacity="0.4"/>
+      <circle class="pulse" cx="34" cy="33" r="3" fill="#d4d4d4"/>
+      <text x="43" y="36.5" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="700" letter-spacing="0.6" fill="#d4d4d4">LIVE · RENDER</text>
 
       <text x="264" y="37" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="14" fill="#737373">↗</text>
 
       <text x="22" y="80" font-family="'Plus Jakarta Sans', sans-serif" font-size="22" font-weight="800" letter-spacing="-0.5" fill="#fafafa">PRIVATEGYM</text>
       <text x="22" y="100" font-family="'JetBrains Mono', monospace" font-size="10.5" fill="#737373">Luxury Pod Booking</text>
 
-      <text x="22" y="130" font-family="'JetBrains Mono', monospace" font-size="11" fill="#b5b5b5">5-role RBAC &amp;amp; live pod booking</text>
+      <text x="22" y="130" font-family="'JetBrains Mono', monospace" font-size="11" fill="#b5b5b5">5-role RBAC &amp; live pod booking</text>
       <text x="22" y="148" font-family="'JetBrains Mono', monospace" font-size="11" fill="#b5b5b5">Dockerized .NET 10 + Postgres</text>
 
       <rect x="22" y="170" width="65.6" height="22" rx="11" fill="#171717" stroke="#2a2a2a"/><text x="54.8" y="184.5" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="#d4d4d4">.NET 10</text><rect x="93.6" y="170" width="79.2" height="22" rx="11" fill="#171717" stroke="#2a2a2a"/><text x="133.2" y="184.5" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="#d4d4d4">EF Core 9</text><rect x="178.79999999999998" y="170" width="58.8" height="22" rx="11" fill="#171717" stroke="#2a2a2a"/><text x="208.2" y="184.5" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="#d4d4d4">Docker</text>

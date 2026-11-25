@@ -140,7 +140,7 @@ def fetch_github_telemetry() -> dict:
                 lang_bytes[name] = lang_bytes.get(name, 0) + edge["size"]
 
         total_bytes = sum(lang_bytes.values()) or 1
-        palette = ["#f5f5f5", "#10b981", "#f59e0b", "#60a5fa", "#737373"]
+        palette = ["#ffffff", "#bdbdbd", "#737373", "#404040", "#262626"]
         top_langs = sorted(lang_bytes.items(), key=lambda x: x[1], reverse=True)[:4]
         languages = [
             (name, round((size / total_bytes) * 100, 1), palette[i % len(palette)])
@@ -189,8 +189,8 @@ def render_hero(fonts_css: str) -> str:
     <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
       <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#ffffff" stroke-opacity="0.03" stroke-width="1"/>
     </pattern>
-    <radialGradient id="glow" cx="25%" cy="20%" r="70%">
-      <stop offset="0%" stop-color="#10b981" stop-opacity="0.10"/>
+    <radialGradient id="glow" cx="25%" cy="15%" r="75%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.06"/>
       <stop offset="100%" stop-color="#0a0a0a" stop-opacity="0"/>
     </radialGradient>
     <clipPath id="cardClip"><rect width="880" height="248" rx="16"/></clipPath>
@@ -203,63 +203,57 @@ def render_hero(fonts_css: str) -> str:
     <rect x="0.5" y="0.5" width="879" height="247" rx="15.5" fill="none" stroke="#262626"/>
 
     <!-- Left Editorial Content -->
-    <g class="fade" style="animation-delay:0.05s">
-      <rect x="32" y="28" width="176" height="24" rx="12" fill="#10b981" fill-opacity="0.10" stroke="#10b981" stroke-opacity="0.35"/>
-      <circle class="pulse" cx="46" cy="40" r="3.5" fill="#10b981"/>
-      <text x="56" y="44" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="600" letter-spacing="0.8" fill="#34d399">AVAILABLE FOR 2026</text>
+    <g class="fade" style="animation-delay:0.1s">
+      <text x="32" y="84" font-family="'Plus Jakarta Sans', sans-serif" font-size="44" font-weight="800" letter-spacing="-1.5" fill="#fafafa">PAWALIT</text>
+      <text x="242" y="84" font-family="'Plus Jakarta Sans', sans-serif" font-size="34" font-weight="700" letter-spacing="-1" fill="#737373">/ Legxcy77</text>
     </g>
 
-    <g class="fade" style="animation-delay:0.15s">
-      <text x="32" y="102" font-family="'Plus Jakarta Sans', sans-serif" font-size="42" font-weight="800" letter-spacing="-1.5" fill="#fafafa">PAWALIT</text>
-      <text x="234" y="102" font-family="'Plus Jakarta Sans', sans-serif" font-size="34" font-weight="700" letter-spacing="-1" fill="#737373">/ Legxcy77</text>
-    </g>
-
-    <g class="fade" style="animation-delay:0.25s">
-      <text x="32" y="136" font-family="'JetBrains Mono', monospace" font-size="12.5" fill="#a3a3a3">Full-Stack Engineer &amp; Systems Architect · Bangkok, TH</text>
-      <text x="32" y="158" font-family="'JetBrains Mono', monospace" font-size="11.5" fill="#737373">Crafting hyper-fluid interfaces &amp; resilient cloud backends.</text>
+    <g class="fade" style="animation-delay:0.2s">
+      <text x="32" y="122" font-family="'JetBrains Mono', monospace" font-size="12.5" fill="#a3a3a3">Full-Stack Engineer &amp; Systems Architect · Bangkok, TH</text>
+      <text x="32" y="144" font-family="'JetBrains Mono', monospace" font-size="11.5" fill="#737373">Crafting hyper-fluid interfaces &amp; resilient cloud backends.</text>
     </g>
 
     <!-- Stack Pills -->
-    <g class="fade" style="animation-delay:0.35s" font-family="'JetBrains Mono', monospace" font-size="10.5" fill="#d4d4d4">
-      <rect x="32" y="186" width="84" height="26" rx="13" fill="#141414" stroke="#2a2a2a"/>
-      <text x="74" y="203" text-anchor="middle">Next.js 15</text>
+    <g class="fade" style="animation-delay:0.3s" font-family="'JetBrains Mono', monospace" font-size="10.5" fill="#d4d4d4">
+      <rect x="32" y="182" width="84" height="26" rx="13" fill="#141414" stroke="#2a2a2a"/>
+      <text x="74" y="199" text-anchor="middle">Next.js 15</text>
 
-      <rect x="124" y="186" width="110" height="26" rx="13" fill="#141414" stroke="#2a2a2a"/>
-      <text x="179" y="203" text-anchor="middle">ASP.NET Core 10</text>
+      <rect x="124" y="182" width="110" height="26" rx="13" fill="#141414" stroke="#2a2a2a"/>
+      <text x="179" y="199" text-anchor="middle">ASP.NET Core 10</text>
 
-      <rect x="242" y="186" width="88" height="26" rx="13" fill="#141414" stroke="#2a2a2a"/>
-      <text x="286" y="203" text-anchor="middle">Cloudflare</text>
+      <rect x="242" y="182" width="88" height="26" rx="13" fill="#141414" stroke="#2a2a2a"/>
+      <text x="286" y="199" text-anchor="middle">Cloudflare</text>
 
-      <rect x="338" y="186" width="66" height="26" rx="13" fill="#141414" stroke="#2a2a2a"/>
-      <text x="371" y="203" text-anchor="middle">Docker</text>
+      <rect x="338" y="182" width="66" height="26" rx="13" fill="#141414" stroke="#2a2a2a"/>
+      <text x="371" y="199" text-anchor="middle">Docker</text>
 
-      <rect x="412" y="186" width="76" height="26" rx="13" fill="#141414" stroke="#2a2a2a"/>
-      <text x="450" y="203" text-anchor="middle">Postgres</text>
+      <rect x="412" y="182" width="76" height="26" rx="13" fill="#141414" stroke="#2a2a2a"/>
+      <text x="450" y="199" text-anchor="middle">Postgres</text>
     </g>
 
     <!-- Right Terminal Window -->
     <g class="fade" style="animation-delay:0.2s">
       <rect x="524" y="28" width="324" height="192" rx="12" fill="#111113" stroke="#27272a"/>
       <line x1="524" y1="56" x2="848" y2="56" stroke="#27272a"/>
-      <circle cx="542" cy="42" r="4" fill="#ef4444" fill-opacity="0.8"/>
-      <circle cx="556" cy="42" r="4" fill="#f59e0b" fill-opacity="0.8"/>
-      <circle cx="570" cy="42" r="4" fill="#10b981" fill-opacity="0.8"/>
+      <circle cx="542" cy="42" r="4" fill="#52525b"/>
+      <circle cx="556" cy="42" r="4" fill="#71717a"/>
+      <circle cx="570" cy="42" r="4" fill="#d4d4d8"/>
       <text x="686" y="45" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#71717a">zsh — legxcy77@prod</text>
 
       <g font-family="'JetBrains Mono', monospace" font-size="11.5">
-        <text x="542" y="82" fill="#10b981">$</text>
+        <text x="542" y="82" fill="#ffffff">$</text>
         <text x="556" y="82" fill="#e4e4e7">whoami</text>
         <text x="542" y="100" fill="#a1a1aa">&gt; fullstack_systems_architect</text>
 
-        <text x="542" y="126" fill="#10b981">$</text>
+        <text x="542" y="126" fill="#ffffff">$</text>
         <text x="556" y="126" fill="#e4e4e7">cat stack.json</text>
         <text x="542" y="144" fill="#a1a1aa">&gt; ["TS", "C#", "Swift", "SQL"]</text>
 
-        <text x="542" y="170" fill="#10b981">$</text>
+        <text x="542" y="170" fill="#ffffff">$</text>
         <text x="556" y="170" fill="#e4e4e7">deploy --status</text>
-        <text x="542" y="188" fill="#34d399">&gt; 3 live cloud apps online</text>
+        <text x="542" y="188" fill="#fafafa">&gt; 3 live cloud apps online</text>
 
-        <text x="542" y="208" fill="#10b981">$</text>
+        <text x="542" y="208" fill="#ffffff">$</text>
         <rect class="blink" x="556" y="198" width="7" height="12" fill="#fafafa"/>
       </g>
     </g>
@@ -380,7 +374,7 @@ def render_velocity(fonts_css: str, telemetry: dict) -> str:
         y = base_y - h
         x = start_x + idx * step
         is_latest = idx == len(monthly) - 1
-        fill = "#10b981" if is_latest else ("#d4d4d4" if count >= max_val * 0.6 else "#525252")
+        fill = "#ffffff" if is_latest else ("#a3a3a3" if count >= max_val * 0.6 else "#404040")
         delay = f"{0.15 + idx * 0.05:.2f}s"
         bars.append(
             f'<rect class="gy" style="animation-delay:{delay}" x="{x}" y="{y}" width="22" height="{h}" rx="4" fill="{fill}">'
@@ -393,8 +387,8 @@ def render_velocity(fonts_css: str, telemetry: dict) -> str:
   <rect width="432" height="196" rx="16" fill="#0a0a0a"/>
   <rect x="0.5" y="0.5" width="431" height="195" rx="15.5" fill="none" stroke="#262626"/>
 
-  <text x="32" y="38" font-family="'Plus Jakarta Sans', sans-serif" font-size="20" font-weight="800" letter-spacing="-0.5" fill="#fafafa">Shipped <tspan fill="#10b981">Velocity</tspan></text>
-  <text x="400" y="36" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10.5" fill="#10b981">{telemetry["total_contributions"]} / YR</text>
+  <text x="32" y="38" font-family="'Plus Jakarta Sans', sans-serif" font-size="20" font-weight="800" letter-spacing="-0.5" fill="#fafafa">Shipped <tspan fill="#737373">Velocity</tspan></text>
+  <text x="400" y="36" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10.5" fill="#e5e5e5">{telemetry["total_contributions"]} / YR</text>
   <text x="32" y="66" font-family="'JetBrains Mono', monospace" font-size="11" fill="#737373">{telemetry["total_commits"]} commits · {telemetry["total_prs"]} PRs · auto-synced</text>
 
   <line x1="32" y1="158" x2="400" y2="158" stroke="#1f1f1f"/>
@@ -445,7 +439,7 @@ def render_heatmap(fonts_css: str, telemetry: dict) -> str:
             ym = days[0]["date"][:7]
             if ym not in seen_months:
                 seen_months.add(ym)
-                if len(seen_months) > 1 or w_idx == 0:
+                if (len(seen_months) > 1 or w_idx == 0) and x <= 685:
                     m_txt = datetime.strptime(ym, "%Y-%m").strftime("%b")
                     month_labels.append(
                         f'<text x="{x}" y="206" font-family="\'JetBrains Mono\', monospace" font-size="10" fill="#737373">{m_txt}</text>'
@@ -502,9 +496,9 @@ def main() -> None:
             title="STELLAR JOB",
             subtitle="GIS Field Operations",
             badge="LIVE · VERCEL",
-            accent="#10b981",
-            line1="Leaflet routing &amp; live dispatch",
-            line2="Digital sign &amp; Thai PDF export",
+            accent="#ffffff",
+            line1="Leaflet routing & live dispatch",
+            line2="Digital sign & Thai PDF export",
             tags=["Next.js 15", "Zustand", "NeonDB"],
             delay="0.1s",
         ),
@@ -516,8 +510,8 @@ def main() -> None:
             title="PRIVATEGYM",
             subtitle="Luxury Pod Booking",
             badge="LIVE · RENDER",
-            accent="#f59e0b",
-            line1="5-role RBAC &amp; live pod booking",
+            accent="#d4d4d4",
+            line1="5-role RBAC & live pod booking",
             line2="Dockerized .NET 10 + Postgres",
             tags=[".NET 10", "EF Core 9", "Docker"],
             delay="0.2s",
@@ -530,9 +524,9 @@ def main() -> None:
             title="KEYSTAY",
             subtitle="Edge Microservices",
             badge="105 EDGE APIs",
-            accent="#38bdf8",
+            accent="#a3a3a3",
             line1="Cloudflare Workers + D1 SQLite",
-            line2="Outbox pattern &amp; QStash queue",
+            line2="Outbox pattern & QStash queue",
             tags=["Workers", "Drizzle", "QStash"],
             delay="0.3s",
         ),
